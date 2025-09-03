@@ -1,6 +1,15 @@
 use dioxus::prelude::*;
 use crate::recipe::Recipe;
 
+#[derive(Debug, Clone, Routable, PartialEq)]
+pub enum Route {
+    #[route("/")]
+    RecipeScreen,
+    #[route("/about")]
+    AboutScreen,
+}
+
+
 #[component]
 pub fn RecipeScreen() -> Element {
     let mut recipe = use_context::<Signal<Recipe>>();
@@ -8,6 +17,11 @@ pub fn RecipeScreen() -> Element {
     rsx! {
         div {
             h3 { "Rezept berechnen" }
+            button {
+                style: "position: fixed; top: 0.3rem; right: 0.3rem; z-index: 1000;",
+                onclick: move |_| { router().push(Route::AboutScreen); },
+                "?"
+            }
 
             button {
                 style: "width: 2rem; font-size: 14pt; font-weight:bold;",
@@ -46,6 +60,30 @@ pub fn RecipeScreen() -> Element {
         }
     }
 }
+
+#[component]
+pub fn AboutScreen() -> Element {
+    rsx! {
+        div {
+            h3 { "Über diese Anwendung" }
+            div {"Kalorienrechner (c) muejoe"}
+            br {}
+            a {
+                color: "#6e9ad3ff",
+                href: "https://github.com/muejoe/recipe-calories",
+                "https://github.com/muejoe/recipe-calories"
+            }
+            br {} br {}
+            div {"Nutzbar unter der MIT-Lizenz"}
+            br{} br{}
+            button {
+                onclick: move |_| { router().push(Route::RecipeScreen); },
+                "back"
+            }
+        }
+    }
+}
+
 
 pub fn input_line<F, V>(number: bool, value: V, on_input: F) -> Element 
 where

@@ -4,15 +4,9 @@ mod recipe;
 mod gui;
 
 use dioxus::prelude::*;
-use gui::RecipeScreen;
+use gui::Route;
 use recipe::Recipe;
 
-
-#[derive(Debug, Clone, Routable, PartialEq)]
-enum Route {
-    #[route("/")]
-    RecipeScreen {},
-}
 
 //const FAVICON: Asset = asset!("/assets/favicon.ico");
 const CSS: Asset = asset!("/assets/main.css");
