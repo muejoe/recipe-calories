@@ -36,7 +36,6 @@ pub fn RecipeScreen() -> Element {
 
             table {
                 style: "width: 100%; border-collapse: collapse;",
-                
                 thead { tr { 
                         th { "Zutat" } th { "Gewicht (g)" } th { "KCal/100g" }
                 }}
